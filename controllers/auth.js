@@ -27,6 +27,7 @@ function signup(req, res) {
   })
   .catch(err => {
     res.status(500).json({ err: err.message })
+    console.log(err)
   })
 }
 

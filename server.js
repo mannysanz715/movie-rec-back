@@ -11,6 +11,7 @@ import './config/database.js'
 // import routes
 import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
+import { router as movieListRouter } from './routes/movieList.js'
 
 // create the express app
 const app = express()
@@ -23,6 +24,7 @@ app.use(formData.parse())
 
 // mount imported routes
 app.use('/api/profiles', profilesRouter)
+app.use('/api/movieList', movieListRouter)
 app.use('/api/auth', authRouter)
 
 // handle 404 errors
@@ -34,5 +36,6 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   res.status(err.status || 500).json({ err: err.message })
 })
+
 
 export { app }
