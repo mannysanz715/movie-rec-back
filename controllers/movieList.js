@@ -1,18 +1,26 @@
 import fetch from 'node-fetch';
 const apiKey = process.env.API_KEY
 
+
 async function getMovieList(req, res){
   try {
     const genreKey = req.params.id
-    console.log(genreKey)
-    let listData = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreKey}`)
+    const apiURLList = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_original_language=en&with_genres=${genreKey}&vote_average.gte=7`
+    let listData = await fetch(apiURLList)
     listData = await listData.json(listData)
-    return await res.status(200).json(listData)
+    const movie = selectRandomMovie(listData)
+    return await res.status(200).json(movie)
   } catch (error) {
     console.log(error)
     return res.status(500).json(error)
   }
 }
+
+function selectRandomMovie(movieList){
+  const randomNum = Math.floor(Math.random() * (movieList.results.length - 1))
+  return movieList.results[randomNum]
+}
+
 
 export{
   getMovieList
