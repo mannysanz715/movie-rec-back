@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import * as movieListCtrl from '../controllers/movieList.js'
-import { decodeUserFromToken, checkAuth } from '../middleware/auth.js'
+import { decodeUserFromToken } from '../middleware/auth.js'
 
 const router = Router()
 
@@ -10,6 +10,6 @@ const router = Router()
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 
-router.get('/:id', checkAuth, movieListCtrl.getMovieList)
+router.get('/:id',  movieListCtrl.getMovieList)
 
 export { router }
