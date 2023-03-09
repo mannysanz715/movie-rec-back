@@ -5,7 +5,7 @@ const apiKey = process.env.API_KEY
 async function getMovieList(req, res){
   try {
     const genreKey = req.params.id
-    const apiURLList = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=7&with_original_language=en&with_genres=${genreKey}&vote_average.gte=7`
+    const apiURLList = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=1&with_original_language=en&with_genres=${genreKey}&vote_average.gte=7`
 
     let listData = await fetch(apiURLList)
     listData = await listData.json(listData)
